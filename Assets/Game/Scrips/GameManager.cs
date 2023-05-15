@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
+    public bool isCoopMode = false;
     public bool gameOver = true;
     [SerializeField]
     private GameObject player;
@@ -24,7 +24,10 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Instantiate(player, Vector3.zero, Quaternion.identity);
+                if(!isCoopMode){
+                    Instantiate(player, Vector3.zero, Quaternion.identity);
+                }
+                
                 gameOver = false;
                 _uiManager.HideTitleScreen();
             }
@@ -33,8 +36,18 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
         }
-
-
-        
+ 
     }
+
+    void OnLevelWasLoaded(int level){
+        string levelName = Application.loadedLevelName;
+        //Debug.Log(levelName);
+
+        if(levelName == "Co-op Mode"){
+
+            isCoopMode = true;
+
+        }
+    }
+
 }

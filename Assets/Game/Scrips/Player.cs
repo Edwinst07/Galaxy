@@ -9,12 +9,18 @@ public class Player : MonoBehaviour
     public bool canTripleShot = false;
     public bool canSpeed = false;//boots
     public bool canShieldTwo = false;
+    [SerializeField]
+    private bool isPlayerOne = false;
+    [SerializeField]
+    private bool isPlayerTwo = false;
 
     [SerializeField]
     private GameObject Shield;
 
     private float horizontalInput;
+    private float horizontalInput2;
     private float verticalInput;
+    private float verticalInput2;
     [SerializeField]
     private float speed = 5.0f;
     //private Vector3 targetPosition;
@@ -34,15 +40,22 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject[] _engines;
     private int hitCount = 0;
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(0, 0, 0);
+
         Shield.SetActive(false);
 
         //_uiManager = GameObject.FInd("Canvas").GetComponent<UIManager>();
         _gameManager = Component.FindObjectOfType<GameManager>();
+
+        if(_gameManager.isCoopMode == false){
+
+            transform.position = new Vector3(0, 0, 0);
+        }
+
+
         _uiManager = Component.FindObjectOfType<UIManager>();
 
         if(_uiManager != null)
@@ -58,15 +71,50 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        imputButton();
-        Move();
+
+        if(isPlayerOne){
+
+            Move();
+            shoot();
+        }
+
+        if(isPlayerTwo){
+
+            MovePlayerTwo();
+            shootPlayerTwo();
+        }
 
     }
 
-    void imputButton()
+
+    void shoot()
     {
         // Button
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) && isPlayerOne)
+        {
+
+            if (Time.time > canFire) // config laser 
+            {
+                _audioSource.Play();    // Add Audio
+
+                canFire = Time.time + fireRate;
+                Instantiate(laserPrefab, transform.position + new Vector3(0, 0.88f, 0), Quaternion.identity);
+
+                if (canTripleShot){ // power up triple laser 
+                    
+                    Instantiate(laserPrefab, transform.position + new Vector3(0.52f, -0.08f, 0), Quaternion.identity);
+                    Instantiate(laserPrefab, transform.position + new Vector3(-0.52f, -0.08f, 0), Quaternion.identity);
+                }
+
+            }
+
+        }
+    }
+
+    void shootPlayerTwo()
+    {
+        // Button
+        if (Input.GetKeyDown(KeyCode.X) && isPlayerTwo)
         {
 
             if (Time.time > canFire) // config laser 
@@ -95,12 +143,65 @@ public class Player : MonoBehaviour
 
         }
 
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
-        transform.Translate(Vector3.up * Time.deltaTime * speed * verticalInput);
+        if(Input.GetKey(KeyCode.RightArrow)){
 
-        // Limits
+            transform.Translate(Vector3.right * Time.deltaTime * speed);
+        }
+
+        if(Input.GetKey(KeyCode.LeftArrow)){
+
+            transform.Translate(Vector3.left * Time.deltaTime * speed);
+        }
+
+        if(Input.GetKey(KeyCode.UpArrow)){
+
+            transform.Translate(Vector3.up * Time.deltaTime * speed);
+        }
+
+        if(Input.GetKey(KeyCode.DownArrow)){
+
+            transform.Translate(Vector3.down * Time.deltaTime * speed);
+        }
+
+       limit();
+
+    }
+
+     void MovePlayerTwo(){
+
+        if (canSpeed)   //  power up +1.5 speed
+        {
+            speed = 6.5f;
+
+        }
+
+        if(Input.GetKey(KeyCode.D)){
+
+            transform.Translate(Vector3.right * Time.deltaTime * speed);
+        }
+
+        if(Input.GetKey(KeyCode.A)){
+
+            transform.Translate(Vector3.left * Time.deltaTime * speed);
+        }
+
+        if(Input.GetKey(KeyCode.W)){
+
+            transform.Translate(Vector3.up * Time.deltaTime * speed);
+        }
+
+        if(Input.GetKey(KeyCode.S)){
+
+            transform.Translate(Vector3.down * Time.deltaTime * speed);
+        }
+
+       limit();
+
+    }
+
+    public void limit(){
+
+         // Limits
         if (transform.position.y < -4.150984)
         {
 

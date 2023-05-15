@@ -8,6 +8,8 @@ TagManager:
   - Triple_Shot_Powerup
   - Speed_Powerup
   - Enemy
+  - Player_1
+  - Player_2
   layers:
   - Default
   - TransparentFX
