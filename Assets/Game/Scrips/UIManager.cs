@@ -12,9 +12,9 @@ public class UIManager : MonoBehaviour
     private Image livesImageDisplay;
     public Text scoreText;
     public int score = 0;
-    [SerializeField]
-    private Image intro;
     public GameObject titleScreen;
+    [SerializeField]
+    private GameObject panelPause;
 
     // Start is called before the first frame update
     void Start(){}
@@ -40,9 +40,31 @@ public class UIManager : MonoBehaviour
 
     public void HideTitleScreen()
     {
-        titleScreen?.SetActive(false);
+        titleScreen.SetActive(false);
         score = 0;
         scoreText.text = "Score: 0";
+    }
+
+    public void showPausePanel(){
+
+        panelPause.SetActive(true);
+    }
+
+    public void hidePausePanel(){
+
+        panelPause.SetActive(false);
+    }
+
+    public void resume(){
+
+        hidePausePanel();
+        Time.timeScale = 1;
+
+    }
+
+    public void backToMainMenu(){
+
+        SceneManager.LoadScene("Main_Menu");
     }
 
 }

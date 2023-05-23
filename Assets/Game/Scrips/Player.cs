@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     
     private UIManager _uiManager;
     private GameManager _gameManager;
+    private Spawn_Manager _spawn_manager;
     private AudioSource _audioSource;
     [SerializeField]
     private GameObject[] _engines;
@@ -61,6 +62,13 @@ public class Player : MonoBehaviour
         if(_uiManager != null)
         {
             _uiManager.UpdateLives(live);
+        }
+
+        _spawn_manager = Component.FindObjectOfType<Spawn_Manager>();
+
+        if(_spawn_manager != null){
+
+            _spawn_manager.startSpawnRoutines();
         }
 
         _audioSource = GetComponent<AudioSource>();
