@@ -367,7 +367,9 @@ GameObject:
   m_Component:
   - component: {fileID: 513490519}
   - component: {fileID: 513490518}
+  - component: {fileID: 513490521}
   - component: {fileID: 513490517}
+  - component: {fileID: 513490520}
   m_Layer: 5
   m_Name: "Pause_Men\xFA_Panel"
   m_TagString: Untagged
@@ -436,6 +438,38 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 560.9, y: 321.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &513490520
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513490516}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de361dcdc300a814e8543dc34a206422, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &513490521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513490516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa531bf0e3c2ece46ad2557e760b54bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,7 +937,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 544278190}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1556,7 +1590,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1387946336}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2009,7 +2043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4be5e78c44ad74c8e1493a39bbffc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCoopMode: 0
+  isCoopMode: 1
   gameOver: 1
   player: {fileID: 5272209582355480233, guid: 05469ea16ec46fc44949397c8196f6a4, type: 3}
   player_1: {fileID: 6727569730259538168, guid: 06be6408b8d246247a08c2a6b3567ac7, type: 3}

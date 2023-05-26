@@ -380,6 +380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9926e9c55d5b74fae0803d36f84f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayerOne: 1
+  isPlayerTwo: 0
 --- !u!95 &1357346388
 Animator:
   serializedVersion: 4

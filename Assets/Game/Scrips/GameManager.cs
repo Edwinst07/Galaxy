@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject player_2;
     private UIManager _uiManager;
+    private Animator _pauseMenuAnimator;
+    private Pause_Menu _pauseMenu;
 
     // Start is called before the first frame update
     void Start()
     {
         _uiManager = Component.FindObjectOfType<UIManager>();
-
+        //_pauseMenu = Component.FindObjectOfType<Pause_Menu>();
     }
 
     // Update is called once per frame
@@ -51,16 +53,13 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("Main_Menu");
             }
         }
-        else{
-            if(Input.GetKeyDown("p")){
+        
+        if(Input.GetKeyDown("p")){ 
 
-                Time.timeScale = 0;
-                _uiManager.showPausePanel();
-            }
-            
-           
+            _uiManager.showPausePanel();
+            //_pauseMenu.pauseAnimation();
+            Time.timeScale = 0;
         }
-
        
 
     }
